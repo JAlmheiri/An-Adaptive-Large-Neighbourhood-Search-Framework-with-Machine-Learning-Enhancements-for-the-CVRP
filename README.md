@@ -9,7 +9,7 @@ We present a systematic, iterative study of learning-augmented Adaptive Large Ne
     classical_baseline.py
     /alns
         alns_base_simple_descent.py
-        alns_sa.py
+        alns_sa.py   # ALNS with simulated annealing acceptance, roulette wheel
         alns_plus.py
         alns_plus_sa.py
     /ml
