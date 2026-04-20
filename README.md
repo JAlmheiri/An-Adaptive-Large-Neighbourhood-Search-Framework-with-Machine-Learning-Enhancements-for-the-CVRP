@@ -6,8 +6,7 @@ We present a systematic, iterative study of learning-augmented Adaptive Large Ne
 ## Directory structure
 ```
 /src
-    /classical
-        clarke_wright.py
+    classical_baseline.py
     /alns
         alns_base.py
         alns_sa.py
