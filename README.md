@@ -29,3 +29,8 @@ We present a systematic, iterative study of learning-augmented Adaptive Large Ne
     benchmarking_spreadsheet.xlsx
     results_table.xlsx
 ```
+## The Team
+- Aysha Aldarmaki					U22104299
+- Jawaher Almeheiri					U22103653
+- Mariam Alhosani					U22101372
+- Sara Alrumaitha					U21200190
