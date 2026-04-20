@@ -1,3 +1,23 @@
+'''
+ALNS+ with neural operator selector (REINFORCE).
+ 
+Destroy operators: random removal, worst removal, shaw removal.
+Repair operators:  greedy insertion, regret insertion.
+ 
+Selector options:
+  - 'roulette' : roulette wheel over accumulated segment scores
+  - 'neural'   : two-network MLP selector trained online via REINFORCE
+                 destroy net: 4 features -> 16 ReLU -> 3 outputs (Softmax)
+                 repair  net: 4 features -> 16 ReLU -> 2 outputs (Softmax)
+                 features: normalized cost, route load variance,
+                           avg customers per route, search progress
+                 optimizer: Adam, lr=0.001, updated every inner iteration when reward > 0
+ 
+Based on:
+  Ropke & Pisinger (2006), doi: 10.1287/trsc.1050.0135
+  Williams (1992), REINFORCE
+  Prince, Understanding Deep Learning (2023), Ch. 3, 19
+'''
 
 import torch
 import torch.nn as nn
@@ -55,21 +75,9 @@ def reinforce_update(log_prob, reward, optimizer):
     loss.backward()         # compute gradients
     optimizer.step()        # update weights
 
-'''
-1 additional detroy -> shaw removal
-1 addtional repair -> regret insert
-Neural network selector added!
 
-ALNS - Adaptive Large Neighborhood Search
-based on:
-S. Ropke and D. Pisinger, “An Adaptive Large Neighborhood Search Heuristic
-for the Pickup and Delivery Problem with Time Windows,” Transportation Science,
-vol. 40, no. 4, pp. 455–472, Nov. 2006, doi: 10.1287/trsc.1050.0135.
-
-the idea: take the or-opt solution from the classical_solve() and improve it
-via destroy & repair operations.
-
-'''
+# ALNS+ with configurable operator selector.
+# usage: ALNS_plus(inst, selector='roulette') or ALNS_plus(inst, selector='neural')
 
 class ALNS_plus:
     def __init__(self, inst: CVRPInstance, selector='roulette'):
