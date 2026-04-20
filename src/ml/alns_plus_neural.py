@@ -1,3 +1,23 @@
+'''
+ALNS+ with neural operator selector (REINFORCE).
+ 
+Destroy operators: random removal, worst removal, shaw removal.
+Repair operators:  greedy insertion, regret insertion.
+ 
+Selector options:
+  - 'roulette' : roulette wheel over accumulated segment scores
+  - 'neural'   : two-network MLP selector trained online via REINFORCE
+                 destroy net: 4 features -> 16 ReLU -> 3 outputs (Softmax)
+                 repair  net: 4 features -> 16 ReLU -> 2 outputs (Softmax)
+                 features: normalized cost, route load variance,
+                           avg customers per route, search progress
+                 optimizer: Adam, lr=0.001, updated every inner iteration when reward > 0
+ 
+Based on:
+  Ropke & Pisinger (2006), doi: 10.1287/trsc.1050.0135
+  Williams (1992), REINFORCE
+  Prince, Understanding Deep Learning (2023), Ch. 3, 19
+'''
 
 import torch
 import torch.nn as nn
