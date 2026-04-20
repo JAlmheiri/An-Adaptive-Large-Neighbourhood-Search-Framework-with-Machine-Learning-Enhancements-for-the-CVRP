@@ -22,8 +22,6 @@ We present a systematic, iterative study of learning-augmented Adaptive Large Ne
         alns_plus_learned_accept.py
         alns_plus_plus.py
         alns_plus_plus_learned.py
-/solutions
-    /cvrp
 /results
     benchmarking_spreadsheet.xlsx
     results_table.xlsx
